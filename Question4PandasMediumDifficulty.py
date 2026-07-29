@@ -24,9 +24,10 @@ data = {
     ],
 }
 
+input_df = pd.DataFrame(data)
 def etl(input_df):
     input_df['email_domain'] = input_df['email'].str.replace(r'^.*@', '', regex=True)
     input_df['anon_phone'] = input_df['phone'].astype(str).str.replace(r'^\d{6}', '******', regex=True)
     return input_df[['anon_phone', 'email_domain', 'user_id']]
 
-print(etl(data))
+print(etl(input_df))
